@@ -1,6 +1,0 @@
- requests==2.30.0
- beautifulsoup4==4.12.2
- APScheduler==3.10.1
- pillow==9.5.0
- pytesseract==0.3.10
- python-dotenv==1.0.0

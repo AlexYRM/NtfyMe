@@ -1,0 +1,5 @@
+    To change the station for which we monitor the prices, we need to change the payload only. To change the station
+    from Petrom to OMV we need to change also the headers => origin parameter
+    Go to the Petrom or OMV website, go to "localizator statii" and open Web Inspector and go to network and search for
+"details.php", then go to Request, click on Raw and copy the Request Payload and paste it in the code.
+    Change the name of the station in the "station_name" variable also. Easy :)

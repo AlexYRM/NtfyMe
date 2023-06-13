@@ -6,7 +6,13 @@ dotenv.load_dotenv()
 class Config:
     def __init__(self):
         self.exchange = os.getenv("server_exchange")
-        self.fuel_price = os.getenv("server_fuelprice")
+        self.fuelprice = os.getenv("server_fuelprice")
+
+    def create_ntfy_topic_name(self, station_id: str):
+        # topic_name = f"https://ntfy.sh/{os.getenv('server_fuelprice')}{station_id.replace('.', '_')}"
+        topic_name = f"https://ntfy.sh/{self.fuelprice}{station_id.replace('.', '_')}"
+        print(f"topic_name este {topic_name}")
+        return topic_name
 
 
 config = Config()

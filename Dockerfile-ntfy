@@ -1,0 +1,25 @@
+FROM python:3.9-slim
+ENV PYTHONUNBUFFERED=1
+# Set the working directory
+WORKDIR /app
+
+# Install the tesseract-ocr package
+RUN apt-get update && apt-get -y install tesseract-ocr
+
+# Display the version of tesseract-ocr
+RUN tesseract --version
+
+# Copy the requirements file and install dependencies
+COPY requirements-ntfy.txt .
+RUN pip install -r requirements-ntfy.txt
+
+# Copy all Python files to the working directory
+COPY *.py .
+
+# Expose the desired port
+EXPOSE 3110
+
+# Specify the command to run the application
+CMD ["python", "main.py"]
+
+
