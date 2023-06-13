@@ -150,6 +150,3 @@ def send_notification():
         # Pause the execution for 15 seconds
         time.sleep(15)
 
-# scraping(f"LNG=RO&CTRISO=ROU&VEHICLE=CAR&MODE=NEXTDOOR&BRAND=OMV&ID=RO.1925.8&DISTANCE=0&HASH=c072287be228" \
-#               "e4c136126eff25336e4219072b8f&TS=1684328564")
-
