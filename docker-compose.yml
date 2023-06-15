@@ -8,6 +8,10 @@ services:
       dockerfile: Dockerfile-ntfy
     ports:
       - "0.0.0.0:3110:3110"
+    environment:
+      - server_exchange='https://ntfy.sh/cursvalutaralexyrm'
+      - server_fuelprice='statia'
+
     volumes:
-      - "./database:/app/database"
+      - "/mnt/external/alex/notify:/app/database"
     restart: always
