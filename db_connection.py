@@ -6,7 +6,7 @@ import json
 
 class DBConnection:
     def __init__(self):
-        self.conn = sqlite3.connect('fuelprice.db', check_same_thread=False)
+        self.conn = sqlite3.connect('database/fuelprice.db', check_same_thread=False)
         self.url = "https://app.wigeogis.com/kunden/omv/data/details.php"
         self.headers = {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -37,6 +37,8 @@ class DBConnection:
         c.execute(query, list(data.values()))
         # Commit the changes to the database
         self.conn.commit()
+        # Close the cursor and connection
+        c.close()
 
     def station_sequence_list(self):
         # Create a cursor object

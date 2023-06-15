@@ -37,7 +37,7 @@ def scraping(payload: str):
 
 # Change name and URL depending on what station is monitored
 def website(st_name):
-    if "Petrom" in st_name:
+    if "PETROM" in st_name:
         return ["Petrom", "https://www.petrom.ro/ro-ro/persoane-fizice/localizator-statii"]
     else:
         return ["OMV", "https://www.omv.ro/ro-ro/statii-de-distributie-carburant/localizare-statii-omv"]

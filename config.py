@@ -11,7 +11,6 @@ class Config:
     def create_ntfy_topic_name(self, station_id: str):
         # topic_name = f"https://ntfy.sh/{os.getenv('server_fuelprice')}{station_id.replace('.', '_')}"
         topic_name = f"https://ntfy.sh/{self.fuelprice}{station_id.replace('.', '_')}"
-        print(f"topic_name este {topic_name}")
         return topic_name
 
 

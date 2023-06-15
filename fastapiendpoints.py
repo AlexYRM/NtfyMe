@@ -29,7 +29,7 @@ def remove_station_from_database(OMV_PETROM_station_id: str):
 # Define an endpoint to download the database file
 @router.get("/get_file")
 async def download_file():
-    path = "./fuelprice.db"
+    path = "./database/fuelprice.db"
     return FileResponse(path=path, filename="fuelprice.db", media_type="application/octet-stream")
 
 
