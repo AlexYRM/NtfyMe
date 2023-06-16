@@ -143,7 +143,7 @@ def send_notification():
             config.create_ntfy_topic_name(station_id=DB.station_ids[0]),
             data=user_displayed_text.encode(encoding='utf-8'),
             headers={"Actions": f"view, Deschide siteul {website(station_name)[0]}, {website(station_name)[1]}; "
-                                "view, Istoric preturi, https://ntfyme.safe.tere.ro/"}
+                                "view, Istoric preturi, https://ntfyme.alexirimia.online/"}
         )
         # Removes the first station ID from the DB.station_ids list.
         DB.station_ids.pop(0)

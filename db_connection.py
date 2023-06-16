@@ -84,6 +84,7 @@ class DBConnection:
         # Execute the SQL query to create the station_identification table if it doesn't exist
         c.execute('''CREATE TABLE IF NOT EXISTS station_identification
                      (station_name TEXT PRIMARY KEY, station_id INTEGER, OMV_PETROM_station_id TEXT)''')
+        # Close the cursor and connection
         c.close()
 
     def create_fueldb_table(self):
@@ -93,6 +94,7 @@ class DBConnection:
         c.execute('''CREATE TABLE IF NOT EXISTS fuel_data
                      (date TEXT, station_id INTEGER, "Motorina Standard" REAL, "Motorina Premium" REAL, 
                      "Benzina Standard" REAL, "Benzina Premium" REAL, "GPL" REAL)''')
+        # Close the cursor and connection
         c.close()
 
     def create_tables(self):
@@ -115,10 +117,14 @@ class DBConnection:
                 "INSERT INTO station_identification (station_name, station_id, OMV_PETROM_station_id) VALUES (?, ?, ?)",
                 (st_name, st_id, omv_petrom_station_id))
             self.conn.commit()
+            # Close the cursor and connection
+            c.close()
             return st_id
         else:
             # Retrieve the existing ID
             st_id = result[0]
+            # Close the cursor and connection
+            c.close()
             return st_id
 
     def remove_station(self, OMV_PETROM_station_id):
@@ -132,6 +138,8 @@ class DBConnection:
         c.execute(delete_query, (OMV_PETROM_station_id,))
         # Commit the changes to the database
         self.conn.commit()
+        # Close the cursor and connection
+        c.close()
 
     def delete_row(self, station_id: str, date: str):
         # Connect to the SQLite database and create cursor
@@ -144,6 +152,8 @@ class DBConnection:
         c.execute(query, (station_id, date))
         # Commit the changes to the database
         self.conn.commit()
+        # Close the cursor and connection
+        c.close()
 
     def check_if_station_has_data_for_date(self, date: str, st_id: int):
         # Construct the SQL query to check if data exists for the given date and station ID
@@ -171,6 +181,8 @@ class DBConnection:
         c.execute(update_query, list(data.values()))
         # Commit the changes to the database
         self.conn.commit()
+        # Close the cursor and connection
+        c.close()
 
     def retrieve_data_for_graph(self, station_id: int):
         c = self.conn.cursor()
@@ -197,6 +209,7 @@ class DBConnection:
         benzina_standard_list = []
         benzina_premium_list = []
         gpl_list = []
+        # Close the cursor and connection
         c.close()
 
         # Process the results and store in separate lists
@@ -233,6 +246,7 @@ class DBConnection:
         # Fetch one from the result set
         result = c.fetchone()
         station_name = result[0] if result is not None else None
+        # Close the cursor and connection
         c.close()
         return station_name
 
@@ -242,6 +256,8 @@ class DBConnection:
         # Execute the SQL query to retrieve station ID
         c.execute(f"SELECT station_id FROM 'station_identification' WHERE station_name = '{name}'")
         st_id = c.fetchone()[0]
+        # Close the cursor and connection
+        c.close()
         return st_id
 
     def retrieve_all_stations_names_list(self):
@@ -251,6 +267,8 @@ class DBConnection:
         c.execute("SELECT station_name FROM station_identification")
         # Fetch all the rows and extract the station names
         station_names_list = [row[0] for row in c.fetchall()]
+        # Close the cursor and connection
+        c.close()
         return station_names_list
 
 
