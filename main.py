@@ -20,11 +20,10 @@ app.include_router(fastapiendpoints.router)
 
 print("Start Scheduling jobs")
 # add a job to the scheduler the instance from "exchange" to be executed at 13:10 every day.
-# scheduler.add_job(func=exchange.send_notification, trigger="cron", hour=13, minute=10)
-# scheduler.add_job(func=exchange.send_notification, trigger="interval", seconds=60)
+scheduler.add_job(func=exchange.send_notification, trigger="cron", hour=13, minute=10)
 # add a job to the scheduler the instance from "fuelprice" to be executed at 13:20 every day.
-scheduler.add_job(func=fuelprice.send_notification, trigger="interval", seconds=60)
-# scheduler.add_job(func=fuelprice.send_notification, trigger="cron", hour=13, minute=20)
+# scheduler.add_job(func=fuelprice.send_notification, trigger="interval", seconds=60)
+scheduler.add_job(func=fuelprice.send_notification, trigger="cron", hour=13, minute=20)
 
 # start the scheduler and run until requested to stop
 scheduler.start()
