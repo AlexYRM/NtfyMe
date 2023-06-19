@@ -11,7 +11,7 @@ services:
     environment:
       - server_exchange='https://ntfy.sh/cursvalutaralexyrm'
       - server_fuelprice='statia'
-
+      - TZ=Europe/Bucharest
     volumes:
       - "/mnt/external/alex/notify:/app/database"
     restart: always

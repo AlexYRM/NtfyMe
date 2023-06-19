@@ -126,11 +126,13 @@ def correct_text(data, station_name):
 
 # Send notification to the user with t
 def send_notification():
+    print("SEND NOTIFICATION FUNCTION  fuelprice=> ")
     # Retrieve the station sequence list from the DB object.
     DB.station_sequence_list()
     # Iterate over the station IDs in the sequence list.
     for num in range(len(DB.station_ids)):
         # Scrape data by calling the scraping function with the payload created by DB.create_payload().
+        print("Start scraping data")
         srted_data = sort_data(scraping(DB.create_payload()))
         # Retrieve the station name using the current station ID from the DB object.
         station_name = DB.retrieve_station_name(DB.station_ids[0])
@@ -139,6 +141,7 @@ def send_notification():
         # Saves the data to the database by calling the to_database function with the station name and scraped data.
         to_database(st_name=station_name, new_data=srted_data)
         # Send a notification using the requests.post method with the appropriate parameters.
+        print("send notifications with NTFY")
         requests.post(
             config.create_ntfy_topic_name(station_id=DB.station_ids[0]),
             data=user_displayed_text.encode(encoding='utf-8'),

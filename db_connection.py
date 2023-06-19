@@ -55,6 +55,7 @@ class DBConnection:
     def create_payload(self):
         payload = f"LNG=RO&CTRISO=ROU&VEHICLE=CAR&MODE=NEXTDOOR&BRAND=OMV&ID={self.station_ids[0]}&DISTANCE=0&HASH=" \
                   f"c072287be228e4c136126eff25336e4219072b8f&TS=1684328564"
+        print(payload)
         return payload
 
 

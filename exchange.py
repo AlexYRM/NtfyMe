@@ -45,6 +45,7 @@ def scraping():
 
 
 def send_notification():
+    print("SEND NOTIFICATION FUNCTION  exchange=> ")
     day = datetime.date.today()
     new_day_format = day.strftime("%d %B %Y")
     api_data(str(datetime.datetime.now().year))
