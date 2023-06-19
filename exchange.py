@@ -41,11 +41,13 @@ def scraping():
     currency_values = soup.find_all("div", class_="currency-value")[:3]
     # join the list of currency values into one string
     values_text = ''.join([value.text for value in currency_values])
+    print(values_text.strip())
     return values_text.strip()
 
 
 def send_notification():
     print("SEND NOTIFICATION FUNCTION  exchange=> ")
+    print(config.exchange)
     day = datetime.date.today()
     new_day_format = day.strftime("%d %B %Y")
     api_data(str(datetime.datetime.now().year))
