@@ -81,27 +81,6 @@ def show_graph(selection):
         return create_station_graph(station_id_number=DB.retrieve_station_id(name=select))
 
 
-# with ui.column().classes("items-center w-full mb-10 my-2"):
-#     ui.label("Pretul Combustibililor").classes("text-2xl font-medium tracking-wide text-fuchsia-700")
-#
-# with ui.row().classes('w-full justify-around my-0'):
-#     with ui.column().classes("w-fit"):
-#         ui.label("Selecteaza benzinaria din lista dropdown, apoi apasa butonul de sub grafic").\
-#             classes("text-lg font-medium tracking-wide text-purple-600")
-#         ui.label("Poti scrie in casuta pentru a micsora lista dropdown").\
-#             classes("text-lg font-medium tracking-wide text-purple-600")
-#         select_station = ui.select(options=DB.retrieve_all_stations_names_list(), with_input=True, on_change=update_selection).\
-#             classes('w-screen bg-slate-900 text-left')
-#         ui.button("Refresh", on_click=refresh).classes()
-#
-# with ui.row().classes('w-full justify-around'):
-#     plot = ui.plotly(show_graph(select)).classes('w-screen')
-# with ui.row().classes('w-full justify-around my-0'):
-#     button = ui.button('Arata graficul', on_click=lambda: plot.update_figure(show_graph(select))).\
-#         bind_visibility_from(select_station, "value").classes("w-fit mt-2 animate-bounce")
-#
-# ui.run(title="Fuel Price Analysis", dark=True, host="0.0.0.0", port=60)
-
 @ui.page("/")
 def page1():
     with ui.column().classes("items-center w-full mb-10 my-2"):
@@ -114,7 +93,7 @@ def page1():
             ui.label("Poti scrie in casuta pentru a micsora lista dropdown").\
                 classes("text-lg font-medium tracking-wide text-purple-600")
             select_station = ui.select(options=DB.retrieve_all_stations_names_list(), with_input=True, on_change=update_selection).\
-                classes('w-screen bg-slate-900 text-left')
+                classes('w-screen bg-slate-600 text-left')
 
     with ui.row().classes('w-full justify-around'):
         plot = ui.plotly(show_graph(select)).classes('w-screen')

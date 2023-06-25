@@ -15,6 +15,13 @@ def check_public_holiday(data_dict, date):
         return False
 
 
+def check_weekend(today):
+    if today.strftime("%A") in ["Saturday", "Sunday"]:
+        return True
+    else:
+        return False
+
+
 # get data from website regarding the requested year's public holidays and append them to a list
 def api_data(yr):
     # make an API request with the year="yr" parameter and save the json to data variable
@@ -54,6 +61,11 @@ def send_notification():
     if check_public_holiday(public_holiday, day):
         # send notification that it is a public holiday and the exchange rate is the same as last time
         text = f"Astăzi este sărbătoare națională, iar cursul valutar va rămâne la fel. \n {scraping()}"
+        requests.post(config.exchange, data=text.encode(encoding='utf-8'),
+                      headers={"Actions": "view, Deschide siteul, https://www.cursbnr.ro/curs-bnr-azi"})
+    elif check_weekend(day):
+        # send notification that it is weekend and the exchange rate is the same as the last working day
+        text = f"Astăzi este weekend, iar cursul valutar va rămâne la fel ca in ultima zi lucratoare. \n {scraping()}"
         requests.post(config.exchange, data=text.encode(encoding='utf-8'),
                       headers={"Actions": "view, Deschide siteul, https://www.cursbnr.ro/curs-bnr-azi"})
     else:
