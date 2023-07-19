@@ -124,7 +124,8 @@ class SquashConnection:
             url=config.squash_url,
             data=msg,
             headers={
-                "Actions": "http, Verifica din nou disponibilitatea, https://ntfyme.alexirimia.online/, method=POST, body={\"check_squash_avbl\"}; "
+                "Actions": "http, Verifica din nou disponibilitatea, https://ntfyme.alexirimia.online/, method=POST, "
+                           "headers.accept=application/json, body={\"check_squash_avbl\"}; "
                            "view, Fa o rezervare, https://www.activ-squash.booking-sports.ro/"}
         )
 
