@@ -11,7 +11,7 @@ services:
     environment:
       - server_exchange=https://ntfy.sh/cursvalutaralexyrm
       - server_fuelprice=statia
-      - server_squash=https://ntfy.sh/squashcubaietii
+      - server_squash_url=https://ntfy.sh/squashcubaietii
       - squash_cookies={"cookieconsent_status":"dismiss","sqzd":"FtooX61*z"}
       - squash_payload={"eeee":"alex_irimia@ymail.com","pppp":"imposibildeaflat","e_mail":""}
       - TZ=Europe/Bucharest
