@@ -1,4 +1,5 @@
 import re
+import json
 import requests
 import datetime
 from config import config
@@ -15,7 +16,7 @@ class SquashConnection:
     def daily_info(self, url, date):
         availability_dict = dict()
         message_list = list()
-        response = self.session.get(url, cookies=self.cookies)
+        response = self.session.get(url, cookies=json.loads(self.cookies))
         soup = BeautifulSoup(response.content, "html.parser")
         # Find the <a> tag with alt="Fa o rezervare"
         a_tag = soup.find_all('a', alt='Fa o rezervare', )
@@ -108,7 +109,7 @@ class SquashConnection:
     def notification_message(self):
         message = []
         with self.session as session:
-            session.post(url=self.login_url, data=self.payload)
+            session.post(url=self.login_url, data=json.loads(self.payload)) # transform payload in a dict
             days_urls, n3xt_days = self.date_selection()
             for url, day in zip(days_urls, n3xt_days):
                 message.append(self.daily_info(url=url, date=day))
@@ -116,12 +117,15 @@ class SquashConnection:
 
     def send_notification(self):
         print("incepe send_notification")
+        msg = self.notification_message()
+        print(config.squash_url)
+        print(type(config.squash_url))
         requests.post(
-            config.config.squash,
-            data=self.notification_message(),
+            url=config.squash_url,
+            data=msg,
             headers={
-                "Actions": f"view, Verifica din nou disponibilitatea, https://ntfyme.alexirimia.online/check_squash_avbl; "
-                           f"view, Fa o rezervare, https://www.activ-squash.booking-sports.ro/"}
+                "Actions": "http, Verifica din nou disponibilitatea, https://ntfyme.alexirimia.online/, method=POST body={\"check_squash_avbl\"}; "
+                           "view, Fa o rezervare, https://www.activ-squash.booking-sports.ro/"}
         )
 
 

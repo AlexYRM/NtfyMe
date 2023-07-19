@@ -3,6 +3,7 @@ from db_connection import DBConnection
 from fastapi import APIRouter, Query
 from squash import SquashConnection
 import json
+import requests
 import datetime
 
 router = APIRouter()
@@ -121,3 +122,4 @@ def manually_add_data_table_fuel_data(
 @router.post("/check_squash_avbl")
 def check_again():
     SQ.send_notification()
+    return {"message": "notification was sent again"}

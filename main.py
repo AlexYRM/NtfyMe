@@ -22,8 +22,9 @@ app = FastAPI()
 app.include_router(fastapiendpoints.router)
 
 print("Start Scheduling jobs")
-# add a job to the scheduler the instance from "exchange" to be executed at 10:30 every day.
-scheduler.add_job(func=SQ.send_notification(), trigger="cron", hour=16, minute=40)
+
+# add a job to the scheduler the instance from "squash" to be executed at 10:30 every day.
+scheduler.add_job(func=SQ.send_notification, trigger="cron", hour=10, minute=30)
 # add a job to the scheduler the instance from "exchange" to be executed at 13:10 every day.
 scheduler.add_job(func=exchange.send_notification, trigger="cron", hour=13, minute=10)
 # add a job to the scheduler the instance from "fuelprice" to be executed at 13:20 every day.
