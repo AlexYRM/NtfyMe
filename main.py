@@ -10,7 +10,7 @@ import fastapiendpoints
 
 # Create an instance of the DBConnection class and assign it to the variable DB
 DB = DBConnection()
-# Create an instance of the SQConnection class and assign it to the variable SQ
+# Create an instance of the SquashConnection class and assign it to the variable SQ
 SQ = SquashConnection()
 # set up a blocking scheduler instance.
 scheduler = BackgroundScheduler()

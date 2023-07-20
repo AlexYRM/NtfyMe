@@ -119,6 +119,8 @@ def manually_add_data_table_fuel_data(
             DB.add_fuel_data(table=table_name, data=new_data)
             return {"message": "Data was successfully inserted in fuel data table"}
 
+
+# Define an endpoint to rescrape and send the data in a notification
 @router.post("/check_squash_avbl")
 def check_again():
     SQ.send_notification()
