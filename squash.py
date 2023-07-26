@@ -2,8 +2,8 @@ import re
 import json
 import requests
 import datetime
-from config import config
 from bs4 import BeautifulSoup
+from dopplerconfig import config
 
 
 class SquashConnection:

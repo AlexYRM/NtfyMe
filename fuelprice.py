@@ -7,7 +7,7 @@ import pytesseract
 import pandas as pd
 from PIL import Image
 from io import BytesIO
-from config import config
+from dopplerconfig import config
 from db_connection import DBConnection
 
 

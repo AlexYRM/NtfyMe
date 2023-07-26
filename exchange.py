@@ -1,6 +1,6 @@
 import requests
 import datetime
-from config import config
+from dopplerconfig import config
 from bs4 import BeautifulSoup
 
 public_holiday = list()

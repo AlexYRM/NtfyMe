@@ -3,7 +3,6 @@ from db_connection import DBConnection
 from fastapi import APIRouter, Query
 from squash import SquashConnection
 import json
-import requests
 import datetime
 
 router = APIRouter()
