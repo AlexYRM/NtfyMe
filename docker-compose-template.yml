@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  ntfy:
+    container_name: NOTIFY
+    build:
+      context: .
+      dockerfile: Dockerfile-ntfy
+    ports:
+      - "0.0.0.0:3110:3110"
+    environment:
+      - doppler_token:<doppler_token>
+    volumes:
+      - "/mnt/external/alex/notify:/app/database"
+    restart: always
