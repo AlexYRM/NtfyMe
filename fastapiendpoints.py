@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Query
 from fastapi.responses import FileResponse
 from db_connection import DBConnection
+from fastapi import APIRouter, Query
+from squash import SquashConnection
 import json
+import requests
 import datetime
 
 router = APIRouter()
 DB = DBConnection()
-
+SQ = SquashConnection()
 
 # Define an endpoint to add a station to the database
 @router.post("/add_station_to_database")
@@ -116,3 +118,10 @@ def manually_add_data_table_fuel_data(
             table_name = "fuel_data"
             DB.add_fuel_data(table=table_name, data=new_data)
             return {"message": "Data was successfully inserted in fuel data table"}
+
+
+# Define an endpoint to rescrape and send the data in a notification
+@router.post("/check_squash_avbl")
+def check_again():
+    SQ.send_notification()
+    return {"message": "notification was sent again"}
