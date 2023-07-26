@@ -9,12 +9,13 @@ services:
     ports:
       - "0.0.0.0:3110:3110"
     environment:
-      - server_exchange=https://ntfy.sh/cursvalutaralexyrm
-      - server_fuelprice=statia
-      - server_squash_url=https://ntfy.sh/squashcubaietii
-      - squash_cookies={"cookieconsent_status":"dismiss","sqzd":"FtooX61*z"}
-      - squash_payload={"eeee":"alex_irimia@ymail.com","pppp":"imposibildeaflat","e_mail":""}
-      - TZ=Europe/Bucharest
+      - NtfyMe:dp.st.dev.4n6KYiqf7V0cACkNJsP6sggFr8zd39ddtZkHepbtyln
+#      - server_exchange=https://ntfy.sh/cursvalutaralexyrm
+#      - server_fuelprice=statia
+#      - server_squash_url=https://ntfy.sh/squashcubaietii
+#      - squash_cookies={"cookieconsent_status":"dismiss","sqzd":"FtooX61*z"}
+#      - squash_payload={"eeee":"alex_irimia@ymail.com","pppp":"imposibildeaflat","e_mail":""}
+#      - TZ=Europe/Bucharest
     volumes:
       - "/mnt/external/alex/notify:/app/database"
     restart: always
