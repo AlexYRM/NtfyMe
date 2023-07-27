@@ -136,8 +136,7 @@ class SquashConnection:
         message = []
         with self.session as session:
             # Perform a POST request to log in using the specified payload
-            # Use json.loads to convert the payload from JSON formatted string to dictionary
-            session.post(url=self.login_url, data=json.loads(self.payload))
+            session.post(url=self.login_url, data=self.payload)
             # Get a list of URLs and corresponding dates using the date_selection method
             days_urls, n3xt_days = self.date_selection()
             # Iterate through the URLs and dates using zip
