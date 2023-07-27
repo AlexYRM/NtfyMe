@@ -32,4 +32,3 @@ class DopplerConfig:
 
 
 config = DopplerConfig()
-config.parsing_data()
