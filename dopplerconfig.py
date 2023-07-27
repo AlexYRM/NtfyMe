@@ -39,5 +39,5 @@ class DopplerConfig:
         print(self.fuelprice)
         print(self.exchange)
 
+
 config = DopplerConfig()
-config.parsing_data()
