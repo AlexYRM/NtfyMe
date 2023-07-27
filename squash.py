@@ -134,6 +134,10 @@ class SquashConnection:
     def notification_message(self):
         # Initialize an empty list to store messages
         message = []
+        print("Notification Message")
+        print(self.login_url)
+        print(self.payload)
+        print(json.loads(self.payload))
         with self.session as session:
             # Perform a POST request to log in using the specified payload
             session.post(url=self.login_url, data=self.payload)

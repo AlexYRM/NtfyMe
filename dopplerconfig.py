@@ -14,6 +14,7 @@ class DopplerConfig:
         self.squash_url = ""
         self.squash_cookies = ""
         self.squash_payload = ""
+        self.parsing_data()
 
     def download_secrets(self, token):
         payload = {}
@@ -35,6 +36,8 @@ class DopplerConfig:
         print(self.squash_payload)
         print(self.squash_cookies)
         print(self.squash_url)
-
+        print(self.fuelprice)
+        print(self.exchange)
 
 config = DopplerConfig()
+config.parsing_data()

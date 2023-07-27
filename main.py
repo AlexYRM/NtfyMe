@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from dopplerconfig import config
 from squash import SquashConnection
 from db_connection import DBConnection
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -9,7 +8,6 @@ import exchange
 import fuelprice
 import fastapiendpoints
 
-config.parsing_data()
 # Create an instance of the DBConnection class and assign it to the variable DB
 DB = DBConnection()
 # Create an instance of the SquashConnection class and assign it to the variable SQ
