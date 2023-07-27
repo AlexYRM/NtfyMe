@@ -27,7 +27,6 @@ class DopplerConfig:
         return topic_name
 
     def parsing_data(self):
-        print("ruleaza parsing_data")
         json_data = self.download_secrets(self.doppler_token)
         data = json.loads(json_data)
         self.exchange = data.get("SERVER_EXCHANGE")
@@ -35,13 +34,6 @@ class DopplerConfig:
         self.squash_url = data.get("SERVER_SQUASH_URL")
         self.squash_cookies = data.get("SQUASH_COOKIE")
         self.squash_payload = data.get("SQUASH_PAYLOAD")
-        print(self.doppler_token)
-        print(data)
-        print(self.squash_payload)
-        print(self.squash_cookies)
-        print(self.squash_url)
-        print(self.fuelprice)
-        print(self.exchange)
 
 
 config = DopplerConfig()

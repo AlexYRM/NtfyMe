@@ -125,10 +125,9 @@ def correct_text(data, station_name):
 
 # Send notification to the user with the data
 def send_notification():
-    print("SEND NOTIFICATION FUNCTION  fuelprice=> ")
+    print("SEND NOTIFICATION FUNCTION  fuelprice ")
     # Retrieve the station sequence list from the DB object.
     DB.station_sequence_list()
-    print(f"{DB.station_sequence_list()} este lista de statii ")
     # Iterate over the station IDs in the sequence list.
     for num in range(len(DB.station_ids)):
         # Scrape data by calling the scraping function with the payload created by DB.create_payload().
