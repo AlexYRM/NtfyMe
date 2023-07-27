@@ -149,6 +149,10 @@ class SquashConnection:
     # Send notification to ntfy app
     def send_notification(self):
         print("Start SquashNotification")
+        print("PAYLOAD AND COOKIES")
+        print(config.squash_payload)
+        print(config.squash_cookies)
+        print(config.squash_url)
         # Call the notification_message method to get the formatted message
         msg = self.notification_message()
         # Perform a POST request to the squash URL with the formatted message as data and additional headers
