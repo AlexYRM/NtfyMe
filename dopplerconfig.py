@@ -22,6 +22,10 @@ class DopplerConfig:
         response = requests.request("GET", self.url, headers=headers, data=payload)
         return response.text
 
+    def create_ntfy_topic_name(self, station_id: str):
+        topic_name = f"https://ntfy.sh/{self.fuelprice}{station_id.replace('.', '_')}"
+        return topic_name
+
     def parsing_data(self):
         print("ruleaza parsing_data")
         json_data = self.download_secrets(self.doppler_token)
