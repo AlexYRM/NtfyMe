@@ -194,13 +194,13 @@ class DBConnection:
         station_name = c.fetchone()[0]
 
         # Retrieve the list of dates
-        date_query = f"SELECT date FROM fuel_data WHERE station_id = '{station_id}'"
+        date_query = f"SELECT date FROM fuel_data WHERE station_id = '{station_id}' ORDER BY date"
         c.execute(date_query)
         date_list = [row[0] for row in c.fetchall()]
 
         # Retrieve the fuel prices for each category
         fuel_query = f"SELECT [Motorina Standard], [Motorina Premium], [Benzina Standard], [Benzina Premium], [GPL] " \
-                     f"FROM fuel_data WHERE station_id = {station_id}"
+                     f"FROM fuel_data WHERE station_id = {station_id} ORDER BY date"
         c.execute(fuel_query)
         results = c.fetchall()
 
