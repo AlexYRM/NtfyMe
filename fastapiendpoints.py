@@ -4,6 +4,7 @@ from fastapi import APIRouter, Query
 from squash import SquashConnection
 import json
 import datetime
+import fuelprice
 
 router = APIRouter()
 DB = DBConnection()
@@ -31,7 +32,7 @@ def remove_station_from_database(OMV_PETROM_station_id: str):
 @router.get("/get_file")
 async def download_file():
     path = "./database/fuelprice.db"
-    return FileResponse(path=path, filename="fuelprice.db", media_type="application/octet-stream")
+    return FileResponse(path=path, filename="database/fuelprice1.db", media_type="application/octet-stream")
 
 
 # Define an endpoint to delete an entire row of data in fuel_data table
@@ -117,6 +118,13 @@ def manually_add_data_table_fuel_data(
             table_name = "fuel_data"
             DB.add_fuel_data(table=table_name, data=new_data)
             return {"message": "Data was successfully inserted in fuel data table"}
+
+
+# Define an endpoint to manually run fuelprice.py
+@router.post("/manually_execute_fuelprice.py")
+def manually_execute_fuelprice():
+    fuelprice.send_notification()
+    return {"message": "fuelprice.py was executed manually"}
 
 
 # Define an endpoint to rescrape and send the data in a notification

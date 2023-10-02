@@ -13,7 +13,7 @@ from db_connection import DBConnection
 
 DB = DBConnection()
 # DB.create_tables()
-
+# pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 # Retrieve the data from the website and process it to return it as a string
 def scraping(payload: str):
@@ -55,6 +55,8 @@ def extra_sorting(dict_data):
 
 # Sort the data into a dictionary for further use
 def sort_data(info_text):
+    print("INFO TEXT")
+    print(info_text)
     sorted_data = dict()            # will store sorted data
     info_text_list = list()         # will store info_text split by newline
     fuel_type = list()              # variable which will store the fuel types
@@ -64,11 +66,13 @@ def sort_data(info_text):
         if i != "":
             info_text_list.append(i)
     # If there are more than 4 item in the list we will use this part of code to parse through this type of data
+    print(info_text_list)
     if len(info_text_list) > 4:
         for i in info_text_list:
             # Save the Date in sorted_data
             if "Data" in i:
-                sorted_data["Date"] = i.split(" ")[1]
+                # sorted_data["Date"] = i.split(" ")[1]
+                sorted_data["Date"] = datetime.datetime.today().strftime('%d %m %Y')
             # Save the fuel prices
             elif "RON" in i:
                 fuel_price.append(i.replace("RON", "").strip())
@@ -82,7 +86,8 @@ def sort_data(info_text):
         for i in info_text_list:
             # Save the Date in sorted_data
             if "Data" in i:
-                sorted_data["Date"] = i[10:20]
+                # sorted_data["Date"] = i[10:20]
+                sorted_data["Date"] = datetime.datetime.today().strftime('%d %m %Y')
             # Append the data to each list
             else:
                 # Sort the string to no have "RON" termination, then split from last whitespace and append each side
@@ -100,7 +105,8 @@ def sort_data(info_text):
 def to_database(st_name, new_data):
     st_id = DB.get_or_create_station(st_name=st_name, omv_petrom_station_id=DB.station_ids[0])
     # Rearrange the data
-    archiving_data = {"Date": new_data["Date"], "Station_ID": st_id}
+    archiving_data = {"Date": datetime.datetime.strptime(new_data["Date"], '%d %m %Y').strftime('%Y-%m-%d'),
+                      "Station_ID": st_id}
     archiving_data.update(new_data['Archiving'])
     # Create a DataFrame from the data
     df = pd.DataFrame.from_records([archiving_data])
@@ -112,7 +118,9 @@ def to_database(st_name, new_data):
 # Create the text which will be sent, adjusted for the number of fuel types sold by the station
 def correct_text(data, station_name):
     # Create the initial text with the date and station name
-    txt = f"Pe data de {datetime.datetime.strptime(data['Date'], '%Y-%m-%d').strftime('%d %m %Y')} la statia " \
+    # txt = f"Pe data de {datetime.datetime.strptime(data['Date'], '%Y-%m-%d').strftime('%d %m %Y')} la statia " \
+    #       f"{station_name} \npreturile la combustibili sunt urmatoarele:\n"
+    txt = f"Pe data de {data['Date']} la statia " \
           f"{station_name} \npreturile la combustibili sunt urmatoarele:\n"
     # Iterate through the fuel price data
     for no in range(len(data['ForUser'])):
@@ -128,6 +136,7 @@ def send_notification():
     print("SEND NOTIFICATION FUNCTION  fuelprice ")
     # Retrieve the station sequence list from the DB object.
     DB.station_sequence_list()
+    print(DB.station_ids)
     # Iterate over the station IDs in the sequence list.
     for num in range(len(DB.station_ids)):
         # Scrape data by calling the scraping function with the payload created by DB.create_payload().
@@ -137,6 +146,7 @@ def send_notification():
         station_name = DB.retrieve_station_name(DB.station_ids[0])
         # Adjust the text by calling the correct_text function with the scraped data and station name.
         user_displayed_text = correct_text(data=srted_data, station_name=station_name)
+        print(user_displayed_text)
         # Saves the data to the database by calling the to_database function with the station name and scraped data.
         to_database(st_name=station_name, new_data=srted_data)
         # Send a notification using the requests.post method with the appropriate parameters.
@@ -151,4 +161,7 @@ def send_notification():
         DB.station_ids.pop(0)
         # Pause the execution for 15 seconds
         time.sleep(15)
+
+
+send_notification()
 
