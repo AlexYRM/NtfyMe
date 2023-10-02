@@ -161,7 +161,3 @@ def send_notification():
         DB.station_ids.pop(0)
         # Pause the execution for 15 seconds
         time.sleep(15)
-
-
-send_notification()
-
