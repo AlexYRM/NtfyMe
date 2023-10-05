@@ -88,9 +88,9 @@ def page1():
 
     with ui.row().classes('w-full justify-around my-0'):
         with ui.column().classes("w-fit"):
-            ui.label("Selecteaza benzinaria din lista dropdown, apoi apasa butonul de sub grafic").\
+            ui.label(" Selecteaza benzinaria din lista dropdown, apoi apasa butonul de sub grafic").\
                 classes("text-lg font-medium tracking-wide text-purple-600")
-            ui.label("Poti scrie in casuta pentru a micsora lista dropdown").\
+            ui.label(" Poti scrie in casuta pentru a micsora lista dropdown").\
                 classes("text-lg font-medium tracking-wide text-purple-600")
             select_station = ui.select(options=DB.retrieve_all_stations_names_list(), with_input=True, on_change=update_selection).\
                 classes('w-screen bg-slate-600 text-left')
