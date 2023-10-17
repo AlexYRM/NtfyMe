@@ -13,5 +13,8 @@ services:
       doppler_token: $DOPPLER_TOKEN
       TZ: Europe/Bucharest
     volumes:
-      - "/mnt/external/alex/notify:/app/database"
+      - "alex-ntfy:/app/database"
     restart: always
+volumes:
+  alex-ntfy:
+    external: true
