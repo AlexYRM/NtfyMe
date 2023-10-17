@@ -3,7 +3,7 @@ version: '3'
 services:
   ntfy:
     container_name: NOTIFY
-    image: ntfyme:2
+    image: ntfyme:3
     build:
       context: .
       dockerfile: Dockerfile-ntfy
