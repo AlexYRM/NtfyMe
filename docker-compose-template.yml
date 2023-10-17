@@ -3,7 +3,7 @@ version: '3'
 services:
   ntfy:
     container_name: NOTIFY
-    image: ntfyme:3
+    image: ntfyme
     build:
       context: .
       dockerfile: Dockerfile-ntfy
@@ -13,8 +13,5 @@ services:
       doppler_token: $DOPPLER_TOKEN
       TZ: Europe/Bucharest
     volumes:
-      - "alex-ntfy:/app/database"
+      - "/mnt/external/alex/notify:/app/database"
     restart: always
-volumes:
-  alex-ntfy:
-    external: true
