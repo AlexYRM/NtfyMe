@@ -144,12 +144,12 @@ def send_notification():
             srted_data = sort_data(scraping(DB.create_payload()))
             # Retrieve the station name using the current station ID from the DB object.
             station_name = DB.retrieve_station_name(DB.station_ids[0])
-        except Exception as e:
-            print(e)
-        else:
             # Adjust the text by calling the correct_text function with the scraped data and station name.
             user_displayed_text = correct_text(data=srted_data, station_name=station_name)
             print(user_displayed_text)
+        except Exception as e:
+            print(e)
+        else:
             # Saves the data to the database by calling the to_database function with the station name and scraped data.
             to_database(st_name=station_name, new_data=srted_data)
             # Send a notification using the requests.post method with the appropriate parameters.
