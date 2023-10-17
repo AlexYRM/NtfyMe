@@ -12,7 +12,6 @@ from db_connection import DBConnection
 
 
 DB = DBConnection()
-# DB.create_tables()
 # pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 # Retrieve the data from the website and process it to return it as a string
@@ -119,7 +118,7 @@ def to_database(st_name, new_data):
 def correct_text(data, station_name):
     # Create the initial text with the date and station name
     # txt = f"Pe data de {datetime.datetime.strptime(data['Date'], '%Y-%m-%d').strftime('%d %m %Y')} la statia " \
-    #       f"{station_name} \npreturile la combustibili sunt urmatoarele:\n"
+    #       f"{station_name} \npreturile la combustibili sunt urmatoarele:\n"ex
     txt = f"Pe data de {data['Date']} la statia " \
           f"{station_name} \npreturile la combustibili sunt urmatoarele:\n"
     # Iterate through the fuel price data
@@ -139,24 +138,28 @@ def send_notification():
     print(DB.station_ids)
     # Iterate over the station IDs in the sequence list.
     for num in range(len(DB.station_ids)):
-        # Scrape data by calling the scraping function with the payload created by DB.create_payload().
-        print("Start scraping data")
-        srted_data = sort_data(scraping(DB.create_payload()))
-        # Retrieve the station name using the current station ID from the DB object.
-        station_name = DB.retrieve_station_name(DB.station_ids[0])
-        # Adjust the text by calling the correct_text function with the scraped data and station name.
-        user_displayed_text = correct_text(data=srted_data, station_name=station_name)
-        print(user_displayed_text)
-        # Saves the data to the database by calling the to_database function with the station name and scraped data.
-        to_database(st_name=station_name, new_data=srted_data)
-        # Send a notification using the requests.post method with the appropriate parameters.
-        print("send notifications with NTFY")
-        requests.post(
-            config.create_ntfy_topic_name(station_id=DB.station_ids[0]),
-            data=user_displayed_text.encode(encoding='utf-8'),
-            headers={"Actions": f"view, Deschide siteul {website(station_name)[0]}, {website(station_name)[1]}; "
-                                "view, Istoric preturi, https://ntfyme.alexirimia.online/"}
-        )
+        try:
+            # Scrape data by calling the scraping function with the payload created by DB.create_payload().
+            print("Start scraping data")
+            srted_data = sort_data(scraping(DB.create_payload()))
+            # Retrieve the station name using the current station ID from the DB object.
+            station_name = DB.retrieve_station_name(DB.station_ids[0])
+        except Exception as e:
+            print(e)
+        else:
+            # Adjust the text by calling the correct_text function with the scraped data and station name.
+            user_displayed_text = correct_text(data=srted_data, station_name=station_name)
+            print(user_displayed_text)
+            # Saves the data to the database by calling the to_database function with the station name and scraped data.
+            to_database(st_name=station_name, new_data=srted_data)
+            # Send a notification using the requests.post method with the appropriate parameters.
+            print("send notifications with NTFY")
+            requests.post(
+                config.create_ntfy_topic_name(station_id=DB.station_ids[0]),
+                data=user_displayed_text.encode(encoding='utf-8'),
+                headers={"Actions": f"view, Deschide siteul {website(station_name)[0]}, {website(station_name)[1]}; "
+                                    "view, Istoric preturi, https://ntfyme.alexirimia.online/"}
+            )
         # Removes the first station ID from the DB.station_ids list.
         DB.station_ids.pop(0)
         # Pause the execution for 15 seconds

@@ -9,7 +9,8 @@ services:
     ports:
       - "0.0.0.0:3110:3110"
     environment:
-      - doppler_token:<doppler_token>
+      doppler_token: $DOPPLER_TOKEN
+      TZ: Europe/Bucharest
     volumes:
       - "/mnt/external/alex/notify:/app/database"
     restart: always
