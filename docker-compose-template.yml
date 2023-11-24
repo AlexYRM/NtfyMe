@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile-ntfy
     networks:
       public_bridge:
-    ports:
-      - "0.0.0.0:3110:3110"
     environment:
       doppler_token: $DOPPLER_TOKEN
       TZ: Europe/Bucharest
@@ -20,7 +18,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.alexirimiaonline.rule=Host(`fuelprice.alexirimia.online`)"
-      - "traefik.http.services.alexirimiaonline.loadbalancer.server.port=1992"
+      - "traefik.http.services.alexirimiaonline.loadbalancer.server.port=3110"
       - "traefik.http.routers.alexirimiaonline.middlewares=traefik-https-redirect"
       - "traefik.http.routers.alexirimiaonline.tls=true"
       - "traefik.http.routers.alexirimiaonline.tls.certresolver=le"
