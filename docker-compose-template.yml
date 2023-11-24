@@ -17,13 +17,13 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.alexirimiaonline.rule=Host(`fuelprice.alexirimia.online`)"
-      - "traefik.http.services.alexirimiaonline.loadbalancer.server.port=3110"
-      - "traefik.http.routers.alexirimiaonline.middlewares=traefik-https-redirect"
-      - "traefik.http.routers.alexirimiaonline.tls=true"
-      - "traefik.http.routers.alexirimiaonline.tls.certresolver=le"
-      - "traefik.http.routers.alexirimiaonline.tls.domains[0].main=alexirimia.online"
-      - "traefik.http.routers.alexirimiaonline.tls.domains[0].sans=*.alexirimia.online"
+      - "traefik.http.routers.fuelpricealexirimiaonline.rule=Host(`fuelprice.alexirimia.online`)"
+      - "traefik.http.services.fuelpricealexirimiaonline.loadbalancer.server.port=3110"
+      - "traefik.http.routers.fuelpricealexirimiaonline.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.fuelpricealexirimiaonline.tls=true"
+      - "traefik.http.routers.fuelpricealexirimiaonline.tls.certresolver=le"
+      - "traefik.http.routers.fuelpricealexirimiaonline.tls.domains[0].main=alexirimia.online"
+      - "traefik.http.routers.fuelpricealexirimiaonline.tls.domains[0].sans=*.alexirimia.online"
 
 networks:
   public_bridge:
