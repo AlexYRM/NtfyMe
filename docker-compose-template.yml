@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-ntfy
+    networks:
+      public_bridge:
     ports:
       - "0.0.0.0:3110:3110"
     environment:
@@ -15,3 +17,17 @@ services:
     volumes:
       - "/mnt/external/alex/notify:/app/database"
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.alexirimiaonline.rule=Host(`fuelprice.alexirimia.online`)"
+      - "traefik.http.services.alexirimiaonline.loadbalancer.server.port=1992"
+      - "traefik.http.routers.alexirimiaonline.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.alexirimiaonline.tls=true"
+      - "traefik.http.routers.alexirimiaonline.tls.certresolver=le"
+      - "traefik.http.routers.alexirimiaonline.tls.domains[0].main=alexirimia.online"
+      - "traefik.http.routers.alexirimiaonline.tls.domains[0].sans=*.alexirimia.online"
+
+networks:
+  public_bridge:
+    name: public_bridge
+    external: true
