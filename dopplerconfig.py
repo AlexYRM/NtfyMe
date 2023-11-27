@@ -34,6 +34,11 @@ class DopplerConfig:
         self.squash_url = data.get("SERVER_SQUASH_URL")
         self.squash_cookies = data.get("SQUASH_COOKIE")
         self.squash_payload = data.get("SQUASH_PAYLOAD")
+        print(self.exchange)
+        print(self.fuelprice)
+        print(self.squash_url)
+        print(self.squash_cookies)
+        print(self.squash_payload)
 
 
 config = DopplerConfig()
